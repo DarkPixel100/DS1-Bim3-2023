@@ -30,7 +30,7 @@ exports.delete = (req, res) => {
         if (!result) {
             req.status(400).send({ message: "Object not found" })
         }
-        res.redirect('/show')
+        res.redirect('/show/id')
     }).catch((err) => {
         res.status(500).send({ message: "Error" + err.message })
     })
@@ -48,11 +48,11 @@ exports.edit = (req, res) => {
 
 exports.update = (req, res) => {
     const id_param = req.params.id
-    empregadosModel.update({
-        nome: req.body.nome,
-        sal_bruto: req.body.sal_bruto,
-        departamento: req.body.departamento
-    },
+    let updateObj = {}
+    if (req.body.nome) updateObj["nome"] = req.body.nome;
+    if (req.body.sal_bruto) updateObj["sal_bruto"] = req.body.sal_bruto;
+    if (req.body.departamento) updateObj["departamento"] = req.body.departamento;
+    empregadosModel.update(updateObj,
         {
             where: { id: id_param }
         }
@@ -60,20 +60,38 @@ exports.update = (req, res) => {
         if (!num) {
             req.status(400).send({ message: "n deu" })
         }
-        res.redirect('/show')
+        res.redirect('/show/id')
     }).catch(err => {
         res.status(500).send({ message: "erro" + err.message })
     })
 }
 
-exports.showResult = (req, res) => {
+exports.showResult = async (req, res) => {
     const ordem = req.params.ordem;
+    const count = {
+        admin: await empregadosModel.count({ where: { departamento: 1 } }),
+        design: await empregadosModel.count({ where: { departamento: 2 } }),
+        conta: await empregadosModel.count({ where: { departamento: 3 } }),
+        fab: await empregadosModel.count({ where: { departamento: 4 } }),
+    }
+    const minmax = {
+        min: await empregadosModel.findOne(
+            {
+                order : ['sal_bruto', 'DESC']
+            }
+        ),
+        max: await empregadosModel.findOne(
+            {
+                order : ['sal_bruto', 'ASC']
+            }
+        ),
+    }
     empregadosModel.findAll(
         {
-            order: [[ordem, 'ASC']]
+            order: [[ordem, ordem != "sal_bruto" ? 'ASC' : 'DESC']]
 
         }).then(results => {
-            res.render("myresult", { resultado: results });
+            res.render("myresult", { resultado: results, contagens: count , minmax: minmax});
 
         }).catch(err => {
             console.log("Error" + err)

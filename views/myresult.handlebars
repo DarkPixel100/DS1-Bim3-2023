@@ -10,14 +10,19 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <title>Empregados</title>
-    
+
 </head>
 
 <body>
     <div style="display: flex; flex-direction: column;">
         <a id="nome" class="text-info"> Pesquisar nome </a>
-        <a class="text-info"> Setores </a>
-        <a class="text-info"> Quantos trabalham no Setor 1 </a>
+        <ul>
+            <h3>Pessoas por setor:</h3>
+            <li>Administrativo: {{ contagens.admin }}</li>
+            <li>Designer: {{ contagens.design }}</li>
+            <li>Contábil: {{ contagens.conta }}</li>
+            <li>Fábrica: {{ contagens.fab }}</li>
+        </ul>
     </div>
     <table class="table">
         <thead>
@@ -32,13 +37,13 @@
 
         <tbody>
             {{#each resultado }}
-            <tr>
+            <tr {{#if (id == minmax.max.id) }} style="border: red 1px solid;" {{/if}}>
                 <td>{{ id }}</td>
                 <td>{{ nome }}</td>
                 <td>R${{ sal_bruto }}</td>
                 <td>R${{ sal_liquido }} </td>
                 <td>{{ departamento }} </td>
-                <td><a href="/edit/{{ id }}"><button  class="btn btn-warning"> Edit </button></a></td>
+                <td><a href="/edit/{{ id }}"><button class="btn btn-warning"> Edit </button></a></td>
                 <td><a href="/delete/{{ id }}"><button class="btn btn-danger"> Delete </button></a></td>
             </tr>
             {{/each}}
