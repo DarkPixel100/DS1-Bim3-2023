@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Empregados</title>
+    
+</head>
+
+<body>
+    <div style="display: flex; flex-direction: column;">
+        <a id="nome" class="text-info"> Pesquisar nome </a>
+        <a class="text-info"> Setores </a>
+        <a class="text-info"> Quantos trabalham no Setor 1 </a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"><a href="/show/id">ID</a></th>
+                <th scope="col"><a href="/show/nome">Nome</a></th>
+                <th scope="col"><a href="/show/sal_bruto">Salário Bruto</a></th>
+                <th scope="col"><a href="/show/sal_bruto">Salário Líquido</a></th>
+                <th scope="col"><a href="/show/departamento" id="tabelas" class="text-info"> Departamento </a></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each resultado }}
+            <tr>
+                <td>{{ id }}</td>
+                <td>{{ nome }}</td>
+                <td>R${{ sal_bruto }}</td>
+                <td>R${{ sal_liquido }} </td>
+                <td>{{ departamento }} </td>
+                <td><a href="/edit/{{ id }}"><button  class="btn btn-warning"> Edit </button></a></td>
+                <td><a href="/delete/{{ id }}"><button class="btn btn-danger"> Delete </button></a></td>
+            </tr>
+            {{/each}}
+
+
+
+        </tbody>
+
+    </table>
+</body>

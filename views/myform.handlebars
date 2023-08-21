@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>Empregados</title>
+</head>
+
+<body>
+  <form class="form" action="/" method="post">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" class="form-control" id="nome" name="nome" required>
+    </div>
+    <div class="form-group">
+      <label for="sal_bruto">Salário Bruto:</label>
+      <input type="number" class="form-control" id="sal_bruto" name="sal_bruto" step=".01" required>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+        <h3>Departamento</h3>
+    
+        <label for="administrativo">
+        <input type="radio" value="1"  id="administrativo" name="departamento" required>Administrativo</label>
+    
+        <label for="designer">
+        <input type="radio" value="2"  id="designer" name="departamento" required>Designer</label>
+    
+        <label for="contabil">
+        <input type="radio" value="3"  id="contabil" name="departamento" required>Contábil</label>
+    
+        <label for="fabrica">
+        <input type="radio" value="4"  id="fabrica" name="departamento" required>Fábrica</label>
+    </div>
+    <button name="submit" type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+  <a href="/show/id" id="tabelas" class="text-info"> Tabelas </a>
+</body>
+
+</html>
