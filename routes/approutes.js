@@ -5,7 +5,8 @@ var myController = require("../controllers/mycontroller")
 
 router.get("/", myController.showForm)
 router.post("/", myController.save)
-router.get("/show/:ordem", myController.showResult)
+router.get("/show/", myController.showResult)
+router.post("/show/", myController.showResult)
 
 router.get("/delete/:id", myController.delete)
 router.get("/edit/:id", myController.edit)

@@ -1,10 +1,9 @@
 const express = require('express')
-
-
-
+const helpers = require("./helpers/helpers");
 const path = require('path')
 const bodyParser = require('body-parser');
 const app = express();
+const { sequelize, Sequelize } = require("./config/database");
 
 app.use(bodyParser.urlencoded({ extended:false }))
 app.use(bodyParser.json())
@@ -19,16 +18,23 @@ const { allowInsecurePrototypeAccess } = require ("@handlebars/allow-prototype-a
 
 app.engine('handlebars', handlebars.engine({ 
 	defaultLayout: false,
-	handlebars: allowInsecurePrototypeAccess(handlebars_mod)
+	handlebars: allowInsecurePrototypeAccess(handlebars_mod),
+	helpers: helpers
 }));
 
+
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Database synced sucessfully");
+  })
+  .catch((error) => {
+    console.error("Error syncing database:", error);
+  });
+
+// view settings
 app.set('views', path.join("./views"))
 app.set('view engine','handlebars')
-
-app.use('/users', (req, res, next) => {
-	console.log('will run before users route');
-	next();
-});
 
 app.use(appRoutes)
 

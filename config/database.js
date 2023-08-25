@@ -1,12 +1,12 @@
-const Sequelize = require('sequelize')
+const Sequelize = require("sequelize");
 
-sequelize = new Sequelize ('empregados','root','',{
-    host: 'localhost',
-    password: 'mysqluser',
-    dialect:'mysql'
-} )
+sequelize = new Sequelize("empresa", "root", "", {
+  host: "localhost",
+  password: "mysqluser",
+  dialect: "mysql",
+});
 
 module.exports = {
-    Sequelize:Sequelize,
-    sequelize:sequelize
-}
+  Sequelize: Sequelize,
+  sequelize: sequelize,
+};

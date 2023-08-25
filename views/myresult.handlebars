@@ -15,33 +15,41 @@
 
 <body>
     <div style="display: flex; flex-direction: column;">
-        <a id="nome" class="text-info"> Pesquisar nome </a>
+        <form action="" method="post">
+            <label for="search">
+                Pesquisar nome: 
+                <input type="search" id="search" name="nome" class="text-info">
+            </label>
+            <button class="btn" type="submit">🔍</button>
+        </form>
         <ul>
             <h3>Pessoas por setor:</h3>
-            <li>Administrativo: {{ contagens.admin }}</li>
-            <li>Designer: {{ contagens.design }}</li>
-            <li>Contábil: {{ contagens.conta }}</li>
-            <li>Fábrica: {{ contagens.fab }}</li>
+            <li>Administrativo: {{ count.admin }}</li>
+            <li>Designer: {{ count.design }}</li>
+            <li>Contábil: {{ count.conta }}</li>
+            <li>Fábrica: {{ count.fab }}</li>
         </ul>
     </div>
     <table class="table">
         <thead>
             <tr>
-                <th scope="col"><a href="/show/id">ID</a></th>
-                <th scope="col"><a href="/show/nome">Nome</a></th>
-                <th scope="col"><a href="/show/sal_bruto">Salário Bruto</a></th>
-                <th scope="col"><a href="/show/sal_bruto">Salário Líquido</a></th>
-                <th scope="col"><a href="/show/departamento" id="tabelas" class="text-info"> Departamento </a></th>
+                <form action="/show/" method="post">
+                    <th scope="col"><button class="btn" type="submit" name="ordem" value="id">ID</button></th>
+                    <th scope="col"><button class="btn" type="submit" name="ordem" value="nome">Nome</button></th>
+                    <th scope="col"><button class="btn" type="submit" name="ordem" value="sal_bruto">Salário Bruto</button></th>
+                    <th scope="col"><button class="btn" type="submit" name="ordem" value="sal_bruto">Salário Líquido</button></th>
+                    <th scope="col"><button class="btn" type="submit" name="ordem" value="departamento"> Departamento </button></th>
+                </form>
             </tr>
         </thead>
 
         <tbody>
-            {{#each resultado }}
-            <tr {{#if (id == minmax.max.id) }} style="border: red 1px solid;" {{/if}}>
+            {{#each results }}
+            <tr {{#ifEquals id minmax.max.id }} style="border: green 1px solid;" {{/ifEquals}}>
                 <td>{{ id }}</td>
                 <td>{{ nome }}</td>
-                <td>R${{ sal_bruto }}</td>
-                <td>R${{ sal_liquido }} </td>
+                <td>{{parseReal sal_bruto }}</td>
+                <td>{{parseReal sal_liquido }} </td>
                 <td>{{ departamento }} </td>
                 <td><a href="/edit/{{ id }}"><button class="btn btn-warning"> Edit </button></a></td>
                 <td><a href="/delete/{{ id }}"><button class="btn btn-danger"> Delete </button></a></td>
