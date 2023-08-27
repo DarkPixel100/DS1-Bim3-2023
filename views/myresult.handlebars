@@ -15,7 +15,7 @@
 
 <body>
     <div style="display: flex; flex-direction: column;">
-        <form action="" method="post">
+        <form action="" method="post" autocomplete="off">
             <label for="search">
                 Pesquisar nome: 
                 <input type="search" id="search" name="nome" class="text-info">
@@ -33,7 +33,7 @@
     <table class="table">
         <thead>
             <tr>
-                <form action="/show/" method="post">
+                <form action="/show/" method="post" autocomplete="off">
                     <th scope="col"><button class="btn" type="submit" name="ordem" value="id">ID</button></th>
                     <th scope="col"><button class="btn" type="submit" name="ordem" value="nome">Nome</button></th>
                     <th scope="col"><button class="btn" type="submit" name="ordem" value="sal_bruto">Salário Bruto</button></th>
@@ -44,12 +44,29 @@
         </thead>
 
         <tbody>
+            <style>
+                #id{{ minmax.min.id }}, #id{{ minmax.max.id }} {
+                    position: relative;
+                }
+                #id{{ minmax.min.id }}::before {
+                    content: "Menor salário";
+                    position: absolute;
+                    bottom: .5rem;
+                    color: red;
+                }
+                #id{{ minmax.max.id }}::before {
+                    content: "Maior salário";
+                    position: absolute;
+                    bottom: .5rem;
+                    color: green;
+                }
+            </style>
             {{#each results }}
-            <tr {{#ifEquals id minmax.max.id }} style="border: green 1px solid;" {{/ifEquals}}>
+            <tr>
                 <td>{{ id }}</td>
                 <td>{{ nome }}</td>
                 <td>{{parseReal sal_bruto }}</td>
-                <td>{{parseReal sal_liquido }} </td>
+                <td id="id{{ id }}">{{parseReal sal_liquido }} </td>
                 <td>{{ departamento }} </td>
                 <td><a href="/edit/{{ id }}"><button class="btn btn-warning"> Edit </button></a></td>
                 <td><a href="/delete/{{ id }}"><button class="btn btn-danger"> Delete </button></a></td>

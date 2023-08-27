@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       sal_bruto: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DOUBLE,
       },
       sal_liquido: {
         type: DataTypes.VIRTUAL,

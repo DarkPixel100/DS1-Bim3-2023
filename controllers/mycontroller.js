@@ -82,10 +82,10 @@ exports.update = (req, res) => {
 exports.showResult = async (req, res) => {
   const minmax = {
     min: await empregadoModel.findOne({
-      order: [["sal_bruto", "DESC"]],
+      order: [["sal_bruto", "ASC"]],
     }),
     max: await empregadoModel.findOne({
-      order: [["sal_bruto", "ASC"]],
+      order: [["sal_bruto", "DESC"]],
     }),
   };
 
