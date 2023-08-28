@@ -12,8 +12,8 @@
   <title>Empregados</title>
 </head>
 
-<body>
-  <form class="form" action="/edit/{{id}}" method="post" autocomplete="off">
+<body style="margin: .5rem;">
+  <form class="form" action="/edit/{{id}}" method="post" autocomplete="off" style="margin-bottom: 1em;">
     <div class="form-group">
       <label for="nome">Nome:</label>
       <input type="text" class="form-control" id="nome" name="nome">
@@ -26,19 +26,20 @@
       <h3>Departamento</h3>
 
       <label for="administrativo">
-        <input type="radio" value="1" id="administrativo" name="departamento" required>Administrativo</label>
+        <input type="radio" value="1" id="administrativo" name="departamento">Administrativo</label>
 
       <label for="designer">
-        <input type="radio" value="2" id="designer" name="departamento" required>Designer</label>
+        <input type="radio" value="2" id="designer" name="departamento">Designer</label>
 
       <label for="contabil">
-        <input type="radio" value="3" id="contabil" name="departamento" required>Contábil</label>
+        <input type="radio" value="3" id="contabil" name="departamento">Contábil</label>
 
       <label for="fabrica">
-        <input type="radio" value="4" id="fabrica" name="departamento" required>Fábrica</label>
+        <input type="radio" value="4" id="fabrica" name="departamento">Fábrica</label>
     </div>
     <button name="submit" type="submit" class="btn btn-primary">Enviar</button>
   </form>
 </body>
+<a href="/show/" id="tabelas" class="text-info"><button type="button" class="btn btn-primary">Cancelar</button></a>
 
 </html>
